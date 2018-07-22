@@ -1,0 +1,11 @@
+{
+  "name": "add-homescreen-icon",
+  "version": "0.1.0",
+  "description": "Javascript bookmarklet to inject custom homescreen icons for iOS webapps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose Martinez",
+  "license": "MIT"
+}
