@@ -1,0 +1,96 @@
+.ahi-shdw {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+
+    background: rgba(50,50,50,.5);
+}
+.ahi-shdw,
+.ahi-shdw * {
+    box-sizing: border-box !important;
+    display: block !important;
+    float: none !important;
+    font-family: "Helvetica" !important;
+    font-weight: 300 !important;
+    font-size: 16px !important;
+    color: #000 !important;
+}
+
+.ahi-pop {
+    width: 300px;
+    height: 300px;
+    z-index: 10001;
+    position: relative;
+    margin: 5% auto 0 auto;
+
+    background: rgba(255,255,255,.9);
+    border-radius: 7px;
+
+    transition: width .5s ease, height .5s ease;
+}
+.ahi-t1 {
+    width: 200px;
+    height: 200px;
+}
+
+.ahi-cont {
+    width: 100%;
+    height: 255px;
+}
+.ahi-cont p {
+    margin: 0 auto;
+    width: 200px;
+    padding: 20px 10px;
+
+    text-align: center;
+}
+.ahi-pop input {
+    width: 90% !important;
+    height: 25px !important;
+    margin: 0 auto !important;
+    padding: 1px 5px !important;
+
+    border: 1px solid #444 !important;
+    border-radius: 0 !important;
+
+    color: #000 !important;
+}
+.ahi-icon {
+    width: 100px;
+    height: 100px;
+    margin: 40px auto 0;
+
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    transition: margin .25s ease;
+}
+.ahi-t2 {
+    margin: 0 auto;
+}
+.ahi-icon img {
+    width:100%;
+    text-align: center;
+}
+.ahi-btns {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    border-top: 1px solid rgba(50,50,50,.25);
+}
+.ahi-btns div {
+    display: inline-block !important;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+.ahi-ok {
+    border-left: 1px solid rgba(50,50,50,.25);
+}
