@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  var AHI = function () {
+  const AHI = function () {
     var self = this,
 
       _css  = '/*gulp-replace-css*/',
@@ -9,14 +9,14 @@
       _domNode, _pi, _im, _in, _cn, _ok, _bs, _ic,
 
       _iconListener = function () { _im.src = this.value; },
-      _reloadPage  = function () { window.location.reload(true); },
-      _addIconLink = function () {
+      _reloadPage  = () => window.location.reload(true),
+      _addIconLink = () => {
         // if empty alert, else create and add <link>
         if (_in.value === '') {
           alert('Please enter URL');
           return;
         } else {
-          var iLink = document.createElement('link');
+          const iLink = document.createElement('link');
           iLink.setAttribute('rel', 'apple-touch-icon');
           iLink.setAttribute('href', _in.value);
           document.head.appendChild(iLink);
@@ -31,13 +31,13 @@
         _ic.classList.add('ahi-t2');
       },
 
-      _prep = function () {
+      _prep = () => {
         // preparation to fix view
-        var vp = document.querySelector('meta[name=viewport]');
-        if(vp !== null) { vp.remove(); }
+        const vp = document.querySelector('meta[name=viewport]');
+        if(vp !== null) vp.remove();
       },
 
-      _cache = function () {
+      _cache = () => {
         _domNode = document.querySelector('.ahi-pop');
         _pi = _domNode.querySelector('p');
         _im = _domNode.querySelector('img');
@@ -48,7 +48,7 @@
         _ic = _domNode.querySelector('.ahi-icon');
       },
 
-      _bind = function () {
+      _bind = () => {
         // set onchange to update icon
         _in.onchange = _iconListener;
 
@@ -62,17 +62,17 @@
       _prep();
 
       // replace meta to fix view for correct scaling across devices
-      var meta = document.createElement('meta');
+      const meta = document.createElement('meta');
       meta.setAttribute('name', 'viewport');
       meta.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=0');
 
       // create element to hold styles
-      var css = document.createElement('style');
-      css.setAttribute('class', 'ahi-css');
+      const css = document.createElement('style');
+      css.setAttribute('id', 'ahi-css');
       css.innerHTML = _css;
 
       // create element to hold markup
-      var div = document.createElement('div');
+      const div = document.createElement('div');
       div.setAttribute('class', 'ahi-shdw');
       div.innerHTML = _html;
 
@@ -81,7 +81,7 @@
       document.head.appendChild(css);
       document.body.appendChild(div);
 
-      // cache elements so there's only on DOM access
+      // cache elements so there's only one DOM access
       _cache();
 
       // bind functions to elements
