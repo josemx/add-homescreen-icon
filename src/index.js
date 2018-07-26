@@ -1,6 +1,3 @@
-/*
- * Needs to have % replaced with %25 in CSS, Safari issue
- */
 (function () {
   'use strict';
   var AHI = function () {

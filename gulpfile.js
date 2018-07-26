@@ -1,45 +1,45 @@
-/*eslint-disable*/
+/* eslint-env node */
 
-var gulp = require('gulp');
+const gulp = require('gulp');
 
-var minHTML = require('gulp-minify-html');
-var minCSS  = require('gulp-minify-css');
-var minJS   = require('gulp-uglify');
-var rename  = require('gulp-rename');
-var replace = require('gulp-replace');
-var fs      = require('fs');
+const minHTML = require('gulp-minify-html');
+const minCSS  = require('gulp-minify-css');
+const minJS   = require('gulp-uglify');
+const rename  = require('gulp-rename');
+const replace = require('gulp-replace');
+const fs      = require('fs');
 
 const renameConfig = {
   suffix: '.min',
 };
 
-gulp.task('minifyHTML', function () {
-  return gulp.src('src/index.html')
+gulp.task('minifyHTML', () =>
+  gulp.src('src/index.html')
     .pipe(rename(renameConfig))
     .pipe(minHTML())
-    .pipe(gulp.dest('dist/min'));
-});
+    .pipe(gulp.dest('dist/min'))
+);
 
-gulp.task('processAndMinifyCSS', function () {
-  return gulp.src('src/main.css')
-    .pipe(replace(/%/g, '%25'))
+gulp.task('processAndMinifyCSS', () =>
+  gulp.src('src/main.css')
+    .pipe(replace(/%/g, '%25'))             //Needs to have % replaced with %25 in CSS, Safari issue
     .pipe(rename(renameConfig))
     .pipe(minCSS())
     .pipe(gulp.dest('dist/min'))
-});
+);
 
-gulp.task('replaceAndMinifyBookmarklet', ['minifyHTML', 'processAndMinifyCSS'], function () {
-  return gulp.src('src/index.js')
-    .pipe(replace(/\/\*gulp-replace-html\*\//, function (s) {
-      return fs.readFileSync('dist/min/index.min.html', 'utf8');
-    }))
-    .pipe(replace(/\/\*gulp-replace-css\*\//, function (s) {
-      return fs.readFileSync('dist/min/main.min.css', 'utf8');
-    }))
+gulp.task('replaceAndMinifyJS', ['minifyHTML', 'processAndMinifyCSS'], () =>
+  gulp.src('src/index.js')
+    .pipe(replace(/\/\*gulp-replace-html\*\//, () =>
+      fs.readFileSync('dist/min/index.min.html', 'utf8')
+    ))
+    .pipe(replace(/\/\*gulp-replace-css\*\//, () =>
+      fs.readFileSync('dist/min/main.min.css', 'utf8')
+    ))
     .pipe(rename(renameConfig))
     .pipe(minJS())
-    .pipe(gulp.dest('dist/min'));
-})
+    .pipe(gulp.dest('dist/min'))
+);
 
 
-gulp.task('default', ['minifyHTML', 'processAndMinifyCSS', 'replaceAndMinifyBookmarklet']);
+gulp.task('default', ['minifyHTML', 'processAndMinifyCSS', 'replaceAndMinifyJS']);
