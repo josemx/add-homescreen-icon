@@ -4,6 +4,10 @@
   "description": "Javascript bookmarklet to inject custom homescreen icons for iOS webapps",
   "main": "index.js",
   "scripts": {
+    "build": "npm run build:minify && npm run build:bookmarkify",
+    "build:minify": "gulp",
+    "build:bookmarkify": "echo \"javascript:$(cat dist/min/index.min.js)\" > dist/bookmarklet.txt",
+    "build:copy": "pbcopy < dist/bookmarklet.txt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jose Martinez",
