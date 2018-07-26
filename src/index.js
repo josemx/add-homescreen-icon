@@ -1,4 +1,4 @@
-(function () {
+(() => {
   'use strict';
   var AHI = function () {
     var self = this,

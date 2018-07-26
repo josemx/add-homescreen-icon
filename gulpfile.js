@@ -4,7 +4,7 @@ const gulp = require('gulp');
 
 const minHTML = require('gulp-minify-html');
 const minCSS  = require('gulp-minify-css');
-const minJS   = require('gulp-uglify');
+const minJS   = require('gulp-uglify-es').default;
 const rename  = require('gulp-rename');
 const replace = require('gulp-replace');
 const fs      = require('fs');
