@@ -9,6 +9,8 @@
   "author": "Jose Martinez",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^5.2.0"
-  }
+    "eslint": "^5.2.0",
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {}
 }
