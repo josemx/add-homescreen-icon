@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10000;
+    z-index: 2147483647;
 
     background: rgba(50,50,50,.5);
 }
@@ -13,7 +13,7 @@
     box-sizing: border-box !important;
     display: block !important;
     float: none !important;
-    font-family: "Helvetica" !important;
+    font-family: -apple-system !important;
     font-weight: 300 !important;
     font-size: 16px !important;
     color: #000 !important;
@@ -22,18 +22,18 @@
 .ahi-pop {
     width: 300px;
     height: 300px;
-    z-index: 10001;
     position: relative;
     margin: 5% auto 0 auto;
 
-    background: rgba(255,255,255,.9);
-    border-radius: 7px;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.5);
 
     transition: width .5s ease, height .5s ease;
 }
 .ahi-t1 {
     width: 200px;
-    height: 200px;
+    height: 220px;
 }
 
 .ahi-con {
@@ -49,25 +49,27 @@
 }
 .ahi-pop input {
     width: 90% !important;
-    height: 25px !important;
+    height: 40px !important;
     margin: 0 auto !important;
-    padding: 1px 5px !important;
+    padding: 0px 10px !important;
 
-    border: 1px solid #444 !important;
-    border-radius: 0 !important;
+    border: none !important;
+    border-radius: 15px !important;
 
+    background: #e8e8e8 !important;
     color: #000 !important;
+
+    outline: none !important;
 }
 .ahi-icon {
     width: 100px;
     height: 100px;
-    margin: 40px auto 0;
+    margin: 25px auto 0;
 
-    border: 1px solid transparent;
     border-radius: 20px;
+    box-shadow: 0 5px 20px 0px rgba(0,0,0,0.15);
 
     overflow: hidden;
-
     transition: margin .25s ease;
 }
 .ahi-t2 {
@@ -77,20 +79,24 @@
     width:100%;
     text-align: center;
 }
+.ahi-icon img:not([src*='placeholder']) {
+  background: #000;
+}
 .ahi-btns {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
 
-    border-top: 1px solid rgba(50,50,50,.25);
+    border-top: 1px solid #e8e8e8;
 }
 .ahi-btns div {
     display: inline-block !important;
     width: 50%;
     padding: 10px;
     text-align: center;
+    color: #246BFC !important;
 }
 .ahi-ok {
-    border-left: 1px solid rgba(50,50,50,.25);
+  font-weight: 500 !important;
 }
