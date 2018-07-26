@@ -23,7 +23,7 @@
     width: 300px;
     height: 300px;
     position: relative;
-    margin: 5% auto 0 auto;
+    margin: 20% auto 0 auto;
 
     border-radius: 20px;
     background: #fff;
@@ -96,6 +96,7 @@
     padding: 10px;
     text-align: center;
     color: #246BFC !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .ahi-ok {
   font-weight: 500 !important;
