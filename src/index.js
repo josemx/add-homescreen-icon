@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const AHI = function () {
-    var self = this,
+    let self = this,
 
       _css  = '/*gulp-replace-css*/',
       _html = '/*gulp-replace-html*/',
@@ -25,7 +25,7 @@
         _in.remove();
         _bs.remove();
 
-        _pi.innerHTML = 'Now just add through the share button';
+        _pi.innerHTML = 'Use Share button to Add to Home Screen';
 
         _domNode.classList.add('ahi-t1');
         _ic.classList.add('ahi-t2');
@@ -57,7 +57,7 @@
         _ok.onclick = _addIconLink;
       };
 
-    self.create = function () {
+    self.create = () => {
       // prep the document;
       _prep();
 
