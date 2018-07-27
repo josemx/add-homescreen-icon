@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build:minify && npm run build:bookmarkify",
+    "build:copy": "npm run build && npm run clipboard",
     "build:minify": "gulp",
     "build:bookmarkify": "echo \"javascript:$(cat dist/min/index.min.js)\" > dist/bookmarklet.txt",
-    "build:copy": "pbcopy < dist/bookmarklet.txt",
+    "clipboard": "pbcopy < dist/bookmarklet.txt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jose Martinez",
