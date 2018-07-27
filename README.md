@@ -21,4 +21,4 @@ javascript:(()=>{"use strict";(new function(){let t,e,i,a,o,n,r,d,c=function(){i
 
 ## Example
 Click for video walkthrough of the process
-[![Video Example](ahi0.png)](https://youtu.be/cxIMJ4O9wLM)
+[![Video Example](ahi-0.png)](https://youtu.be/cxIMJ4O9wLM)
