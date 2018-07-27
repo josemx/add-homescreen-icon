@@ -11,7 +11,7 @@ This will produce a bookmarklet.txt file which contains the code to be pasted in
 ```
 npm run build:copy
 ```
-This command will build and copy the output the clipboard. *macOS only*
+This command will build and copy the output into your clipboard. *macOS only*
 
 ## Code
 ```
