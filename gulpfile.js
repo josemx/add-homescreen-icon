@@ -2,8 +2,8 @@
 
 const gulp = require('gulp');
 
-const minHTML = require('gulp-minify-html');
-const minCSS  = require('gulp-minify-css');
+const minHTML = require('gulp-htmlmin');
+const minCSS  = require('gulp-csso');
 const minJS   = require('gulp-uglify-es').default;
 const rename  = require('gulp-rename');
 const replace = require('gulp-replace');
@@ -16,7 +16,7 @@ const renameConfig = {
 gulp.task('minifyHTML', () =>
   gulp.src('src/index.html')
     .pipe(rename(renameConfig))
-    .pipe(minHTML())
+    .pipe(minHTML({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist/min'))
 );
 
@@ -28,7 +28,7 @@ gulp.task('processAndMinifyCSS', () =>
     .pipe(gulp.dest('dist/min'))
 );
 
-gulp.task('replaceAndMinifyJS', ['minifyHTML', 'processAndMinifyCSS'], () =>
+gulp.task('replaceAndMinifyJS', gulp.series('minifyHTML', 'processAndMinifyCSS', () =>
   gulp.src('src/index.js')
     .pipe(replace(/\/\*gulp-replace-html\*\//, () =>
       fs.readFileSync('dist/min/index.min.html', 'utf8')
@@ -39,7 +39,7 @@ gulp.task('replaceAndMinifyJS', ['minifyHTML', 'processAndMinifyCSS'], () =>
     .pipe(rename(renameConfig))
     .pipe(minJS())
     .pipe(gulp.dest('dist/min'))
-);
+));
 
 
-gulp.task('default', ['minifyHTML', 'processAndMinifyCSS', 'replaceAndMinifyJS']);
+gulp.task('default', gulp.parallel('minifyHTML', 'processAndMinifyCSS', 'replaceAndMinifyJS'));
