@@ -35,6 +35,10 @@
         // preparation to fix view
         const vp = document.querySelector('meta[name=viewport]');
         if(vp !== null) vp.remove();
+
+        // remove any current touch icons
+        const icons = document.querySelectorAll('link[rel*=apple-touch-icon]');
+        icons.forEach((icon) => icon.remove());
       },
 
       _cache = () => {
