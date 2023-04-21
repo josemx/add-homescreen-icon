@@ -1,0 +1,5 @@
+{
+  "mount": "dist",
+  "port": 4441,
+  "watch": "dist"
+}

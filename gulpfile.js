@@ -1,6 +1,12 @@
 /* eslint-env node */
 
-const gulp = require('gulp');
+const {
+  dest,
+  parallel,
+  series,
+  src,
+  watch,
+} = require('gulp');
 
 const minHTML = require('gulp-htmlmin');
 const minCSS  = require('gulp-csso');
@@ -13,33 +19,63 @@ const renameConfig = {
   suffix: '.min',
 };
 
-gulp.task('minifyHTML', () =>
-  gulp.src('src/index.html')
-    .pipe(rename(renameConfig))
-    .pipe(minHTML({ collapseWhitespace: true }))
-    .pipe(gulp.dest('dist/min'))
+const minifyHTML = () => src('src/index.html')
+  .pipe(rename(renameConfig))
+  .pipe(minHTML({ collapseWhitespace: true }))
+  .pipe(dest('dist/min'));
+
+const processAndMinifyCSS = () => src('src/main.css')
+  .pipe(replace(/%/g, '%25')) //Needs to have % replaced with %25 in CSS, Safari issue
+  .pipe(rename(renameConfig))
+  .pipe(minCSS())
+  .pipe(dest('dist/min'));
+
+const minifyDependencies = parallel(
+  minifyHTML,
+  processAndMinifyCSS
 );
 
-gulp.task('processAndMinifyCSS', () =>
-  gulp.src('src/main.css')
-    .pipe(replace(/%/g, '%25'))             //Needs to have % replaced with %25 in CSS, Safari issue
-    .pipe(rename(renameConfig))
-    .pipe(minCSS())
-    .pipe(gulp.dest('dist/min'))
+const replaceAndMinifyJS = () => src('src/index.js')
+  .pipe(replace('/*gulp-replace-html*/', () =>
+    fs.readFileSync('dist/min/index.min.html', 'utf8')
+  ))
+  .pipe(replace('/*gulp-replace-css*/', () =>
+    fs.readFileSync('dist/min/main.min.css', 'utf8')
+  ))
+  .pipe(rename(renameConfig))
+  .pipe(minJS())
+  .pipe(dest('dist/min'));
+
+const defaultTask = series(
+  minifyDependencies,
+  replaceAndMinifyJS
 );
 
-gulp.task('replaceAndMinifyJS', gulp.series('minifyHTML', 'processAndMinifyCSS', () =>
-  gulp.src('src/index.js')
-    .pipe(replace(/\/\*gulp-replace-html\*\//, () =>
-      fs.readFileSync('dist/min/index.min.html', 'utf8')
-    ))
-    .pipe(replace(/\/\*gulp-replace-css\*\//, () =>
-      fs.readFileSync('dist/min/main.min.css', 'utf8')
-    ))
-    .pipe(rename(renameConfig))
-    .pipe(minJS())
-    .pipe(gulp.dest('dist/min'))
-));
+const distStandalone = () => src('src/standalone.html')
+  .pipe(rename('index.html'))
+  .pipe(dest('dist'));
 
+const buildStandalone = series(
+  defaultTask,
+  distStandalone
+);
 
-gulp.task('default', gulp.parallel('minifyHTML', 'processAndMinifyCSS', 'replaceAndMinifyJS'));
+const watchifiedDefault = (cb) => defaultTask(cb);
+
+const watchStandalone = () => {
+  watch('src/main.css', watchifiedDefault);
+  watch('src/index.html', watchifiedDefault);
+  watch('src/standalone.html', distStandalone);
+  watch('src/index.js', watchifiedDefault);
+};
+
+module.exports = {
+  buildStandalone,
+  default: defaultTask,
+  distStandalone,
+  minifyDependencies,
+  minifyHTML,
+  processAndMinifyCSS,
+  replaceAndMinifyJS,
+  watchStandalone,
+};
