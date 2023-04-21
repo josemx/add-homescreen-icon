@@ -47,6 +47,11 @@
 
     text-align: center;
 }
+.ahi-source {
+    display: flex !important;
+    flex-direction: row;
+    padding: 0 1rem;
+}
 .ahi-pop input {
     width: 90% !important;
     height: 40px !important;
@@ -60,6 +65,12 @@
     color: #000 !important;
 
     outline: none !important;
+}
+.ahi-up {
+    margin-left: 1rem;
+    border: none;
+    border-radius: 15px;
+    padding: 0 0.75rem;
 }
 .ahi-icon {
     width: 100px;
