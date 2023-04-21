@@ -1,9 +1,18 @@
 <div class="ahi-pop">
   <div class="ahi-con">
     <p>Enter image URL</p>
-    <input type="text" placeholder="ex: https://placehold.it/500" />
+    <div class="ahi-source">
+      <input type="text" placeholder="ex: https://placehold.it/500" />
+      <button class="ahi-up">⇧</button>
+      <input
+        accept="image/*"
+        class="ahi-fr"
+        style="display:none!important"
+        type="file"
+      />
+    </div>
     <div class="ahi-icon">
-      <img src="https://via.placeholder.com/500/e8e8e8" alt="icon error"/>
+      <img src="https://via.placeholder.com/500/e8e8e8" alt="icon error" data-url=""/>
     </div>
   </div>
   <div class="ahi-btns">
